@@ -49,3 +49,12 @@ function divide(a, b) {
 function operate(func, a, b) {
     return func(a, b);
 }
+
+const digits = document.querySelectorAll('.digit');
+const firstNumber = document.querySelector('.first-number');
+
+digits.forEach((digit) => {
+    digit.addEventListener('click', () => {
+        firstNumber.textContent += digit.textContent;
+    })
+});
