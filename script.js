@@ -51,19 +51,46 @@ function operate(func, a, b) {
 }
 
 const digits = document.querySelectorAll('.digit');
-const firstNumber = document.querySelector('.first-number');
+const firstDisplay = document.querySelector('.first-number');
+const display = document.querySelector('.display');
+
 
 /**
- * Displays the selected digit or operation in the selected display.
- * @param {DOM Element} display 
- * @param {DOM Element} value 
+ * Populates the operand part of the display.
+ * If the last element was an operator, creates an operand section of the
+ * display.
+ * Else, it concatenates the value of the button press into this display.
+ * @param {button} value 
  */
-function populateDisplay(display, value) {
-    display.textContent += value.textContent;
+function populateDisplay(value) {
+    if (display.childNodes.length === 0 || 
+        display.lastChild.className !== 'operand') {
+        createOperand(value);
+    } else {
+        display.lastChild.textContent += value.textContent;
+    }
+}
+
+/**
+ * Creates the operand part of the display.
+ * @param {button} value 
+ */
+function createOperand(value) {
+    const header = document.createElement('h1');
+    header.classList.add("operand");
+    header.textContent += value.textContent;
+    display.appendChild(header);
 }
 
 digits.forEach((digit) => {
     digit.addEventListener('click', () => {
-        populateDisplay(firstNumber, digit);
+        populateDisplay(digit);
     })
 });
+
+
+console.log(display.className);
+const header = document.createElement('h1');
+console.log(header.className);
+header.classList.add("operand");
+console.log(header.className);
