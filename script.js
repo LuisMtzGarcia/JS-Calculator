@@ -37,3 +37,15 @@ function multiply(a, b) {
 function divide(a, b) {
     return a / b;
 }
+
+/**
+ * Receives a function and two parameters.
+ * Passes these two parameters to the function.
+ * @param {function} func 
+ * @param {number} a 
+ * @param {number} b 
+ * @returns 
+ */
+function operate(func, a, b) {
+    return func(a, b);
+}
