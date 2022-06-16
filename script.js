@@ -53,8 +53,17 @@ function operate(func, a, b) {
 const digits = document.querySelectorAll('.digit');
 const firstNumber = document.querySelector('.first-number');
 
+/**
+ * Displays the selected digit or operation in the selected display.
+ * @param {DOM Element} display 
+ * @param {DOM Element} value 
+ */
+function populateDisplay(display, value) {
+    display.textContent += value.textContent;
+}
+
 digits.forEach((digit) => {
     digit.addEventListener('click', () => {
-        firstNumber.textContent += digit.textContent;
+        populateDisplay(firstNumber, digit);
     })
 });
