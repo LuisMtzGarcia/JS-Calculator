@@ -50,11 +50,6 @@ function operate(func, a, b) {
     return func(a, b);
 }
 
-const digits = document.querySelectorAll('.digit');
-const firstDisplay = document.querySelector('.first-number');
-const display = document.querySelector('.display');
-
-
 /**
  * Populates the operand part of the display.
  * If the last element was an operator, creates an operand section of the
@@ -62,7 +57,7 @@ const display = document.querySelector('.display');
  * Else, it concatenates the value of the button press into this display.
  * @param {button} value 
  */
-function populateDisplay(value) {
+function displayOperand(value) {
     if (display.childNodes.length === 0 || 
         display.lastChild.className !== 'operand') {
         createOperand(value);
@@ -82,15 +77,36 @@ function createOperand(value) {
     display.appendChild(header);
 }
 
+/**
+ * Populates the operator part of the display.
+ * Stores the first operand in firstValue, global variable.
+ * @param {button} value 
+ */
+function displayOperator(value) {
+    if (display.childNodes.length === 0) {
+        alert("You have to first enter a number.");
+    } else {
+        const header = document.createElement('h1');
+        header.classList.add("operator");
+        header.textContent += value.textContent
+        display.appendChild(header);
+        firstValue = parseInt(header.previousElementSibling.textContent);
+    }
+}
+
+const display = document.querySelector('.display');
+const digits = document.querySelectorAll('.digit');
+let operations = [...document.querySelector('.operations').children];
+let firstValue;
+
 digits.forEach((digit) => {
     digit.addEventListener('click', () => {
-        populateDisplay(digit);
+        displayOperand(digit);
     })
 });
 
-
-console.log(display.className);
-const header = document.createElement('h1');
-console.log(header.className);
-header.classList.add("operand");
-console.log(header.className);
+operations.forEach(operation => {
+    operation.addEventListener('click', () => {
+        displayOperator(operation);
+    })
+})
