@@ -17,3 +17,13 @@ function sum(a, b) {
 function subtract(a, b) {
     return a - b;
 }
+
+/**
+ * Receives two numbers and multiplies them.
+ * @param {number} a 
+ * @param {number} b 
+ * @returns 
+ */
+function multiply(a, b) {
+    return a * b;
+}
