@@ -27,3 +27,13 @@ function subtract(a, b) {
 function multiply(a, b) {
     return a * b;
 }
+
+/**
+ * Receives two numbers and divides them.
+ * @param {number} a 
+ * @param {number} b 
+ * @returns 
+ */
+function divide(a, b) {
+    return a / b;
+}
