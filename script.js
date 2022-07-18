@@ -96,6 +96,7 @@ function displayOperator(value) {
 
 const display = document.querySelector('.display');
 const digits = document.querySelectorAll('.digit');
+const clear = document.querySelector('.clear');
 let operations = [...document.querySelector('.operations').children];
 let firstValue;
 
@@ -109,4 +110,8 @@ operations.forEach(operation => {
     operation.addEventListener('click', () => {
         displayOperator(operation);
     })
+})
+
+clear.addEventListener('click', () => {
+    display.innerHTML = '';
 })
