@@ -1,3 +1,7 @@
 .operand, .operator {
     margin: 0px;
 }
+
+.buttons {
+    margin-right: 2em;
+}
