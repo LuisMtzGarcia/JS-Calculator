@@ -96,9 +96,56 @@ function displayOperator(value) {
     }
 }
 
-const display = document.querySelector('.display');
+/**
+ * Calls the calculateResult function and appends the result to the display.
+ */
+function displayResult() {
+    let displayElements = [...display.children];
+    let result = calculateResult(displayElements);
+    const finalResult = document.createElement('h1');
+    finalResult.classList.add("result");
+    finalResult.textContent += '=';
+    finalResult.textContent += result;
+    display.appendChild(finalResult);
+}
+
+/**
+ * Calculates the result of the operation based on the display's elements.
+ * @param {*} elements 
+ * @returns 
+ */
+function calculateResult(elements) {
+    let result;
+    let lastValue;
+    elements.forEach(element => {
+        if (element.className === 'operand') {
+            if (lastValue) {
+                let currentValue = parseInt(element.textContent);
+                if (element.previousElementSibling.className === 'operator') {
+                    let operator = element.previousElementSibling.textContent;
+                    if (operator === '+') {
+                        result = sum(lastValue, currentValue);
+                    } else if (operator === '-') {
+                        result = subtract(lastValue, currentValue);
+                    } else if (operator === 'x') {
+                        result = multiply(lastValue, currentValue);
+                    } else if (operator === '÷') {
+                        result = divide(lastValue, currentValue);
+                    }
+                    lastValue = result;
+                }
+            } else {
+                lastValue = parseInt(element.textContent);
+            }
+        }
+    })
+    return result;
+}
+
+let display = document.querySelector('.display');
 const digits = document.querySelectorAll('.digit');
 const clear = document.querySelector('.clear');
+const equalsButton = document.querySelector('.equals');
 let operations = [...document.querySelector('.operations').children];
 let firstValue;
 
@@ -116,4 +163,8 @@ operations.forEach(operation => {
 
 clear.addEventListener('click', () => {
     display.innerHTML = '';
+})
+
+equalsButton.addEventListener('click', () => {
+    displayResult();
 })
