@@ -85,7 +85,9 @@ function createOperand(value) {
 function displayOperator(value) {
     if (display.childNodes.length === 0) {
         alert("You have to first enter a number.");
-    } else {
+    } else if (display.lastChild.className === 'operator') {
+        alert("Cannot place an operator after an operator.");
+    }  else {
         const header = document.createElement('h1');
         header.classList.add("operator");
         header.textContent += value.textContent
