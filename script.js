@@ -102,11 +102,16 @@ function displayOperator(value) {
 function displayResult() {
     let displayElements = [...display.children];
     let result = calculateResult(displayElements);
-    const finalResult = document.createElement('h1');
-    finalResult.classList.add("result");
-    finalResult.textContent += '=';
-    finalResult.textContent += result;
-    display.appendChild(finalResult);
+
+    const equalsSign = document.createElement('h1');
+    equalsSign.classList.add("result");
+    equalsSign.textContent += '=';
+    display.appendChild(equalsSign);
+
+    const displayResult = document.createElement('h1');
+    displayResult.classList.add("operand");
+    displayResult.textContent += result;
+    display.appendChild(displayResult);
 }
 
 /**
@@ -142,6 +147,10 @@ function calculateResult(elements) {
     return result;
 }
 
+function clearDisplay() {
+    display.textContent = '';
+}
+
 let display = document.querySelector('.display');
 const digits = document.querySelectorAll('.digit');
 const clear = document.querySelector('.clear');
@@ -162,7 +171,7 @@ operations.forEach(operation => {
 })
 
 clear.addEventListener('click', () => {
-    display.innerHTML = '';
+    clearDisplay();
 })
 
 equalsButton.addEventListener('click', () => {
